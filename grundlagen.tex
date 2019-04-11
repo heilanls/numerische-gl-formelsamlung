@@ -10,3 +10,131 @@
 				\item Homogenität: $\forall a \in \mathbb{K}, v \in V: ||av|| = |a| \cdot ||v|| $
 				\item Dreiecksungleichung: $ \forall v,w \in V: ||v+w|| \leq ||v|| + ||w||$
 			\end{itemize}
+			
+		\subsubsection{Ein paar Standard-Normen, die man immer mal wieder braucht}
+			$$ \Norm{v}_2 := \sqrt{\Sum{i=1}{n}v_i^2} $$
+			$$ \Norm{v}_1 := \Sum{i=1}{n}|v_i| $$
+			$$ \Norm{v}_\infty := \max\limits_{1 \leq i \leq n}|v_i| $$
+		
+		
+		
+		\subsubsection{Absoluter Fehler}
+			Absoluter Fehler zwischen Wert $ x $ und der Näherung (dem gestörten $ x $) $ \tilde{x} = x + \Delta x $ ist die Norm der Differenz:
+			$$ \Norm{\Delta x} = \Norm{x-\tilde{x}} $$
+			
+			
+		\subsubsection{Relativer Fehler}
+			Der relative Fehler zwischen Wert und Näherung (gestörtem Wert) ist
+			$$ \delta_x := \frac{\Norm{\Delta x}}{\Norm{x}} = \frac{\Norm{x-\tilde{x}}}{\Norm{x}}$$
+		\pagebreak
+		
+	\subsection{Gleitpunkt- und Maschinenzahlen, Rundung und Grundrechenarten}
+		
+			\subsubsection{Gleitpunktzahlen}
+				Für $ B \in \naturalnumbers \setminus \{1\} $ und $ t \in \naturalnumbers $ ist die Menge der t-stelligen Gleitpunktzahlen zur Basis B
+				$$ \floatingpointnumbers{B}{t} := \big\{M\cdot B^E: M = 0 \vee B^{t-1} \leq |M| < B^t; M,E \in \wholenumbers \big\} $$
+				Der relative Abstand von zwei Aufeinanderfolgenden Gleitpunktzahlen ist
+				$$ \frac{(|M|+1)B^E - |M|B^E}{|M|B^E} = \frac{B^E}{|M|B^E} = \frac{1}{|M|} $$
+				
+				\paragraph{Auflösung} Die Auflösung ist der maximale relative Abstand in einer Menge von Gleitpunktzahlen: 
+				$$ \varrho := \frac{1}{B^{t-1}} = B^{1-t} $$
+				Daraus leitet sich die sog. Maschinengenauigkeit, d.h. die Schranke für den relativen Abstand einer Zahl $ x\in \realnumbers $ zur nächsten Gleitpunktzahl, ab:
+				$$ eps := \frac{\varrho}{2} $$
+				
+			\subsubsection{Maschinenzahlen}
+				Da eine Menge $ \floatingpointnumbers{B}{t} $ immer noch unendlich ist, kann man sie nicht im Rechner darstellen. Deswegen muss man dem Exponenten E einen Wertebereich geben, damit die Zahlen nicht beliebig weit abhauen:
+				$$ \machinenumbers{B}{t}{\alpha}{\beta} := \big\{M\cdot B^E: M = 0 \vee B^{t-1} \leq |M| < B^t; M,E \in \wholenumbers, \alpha \leq E \leq \beta \big\} $$
+				Maschinenzahlen mit B,t,$ \alpha,\beta $ sind also die Gleitpunktzahlen, bei denen der Exponent zwischen $ \alpha $ und $ \beta $ liegt.
+				
+				\paragraph{Kenngrößen} Da es nur endlich viele Maschinenzahlen zu den gegebenen Koeffizienten gibt, kann man bestimmte 'Grenzzahlen' bestimmen:
+				\begin{itemize}
+					\item kleinste positive Zahl: $ \sigma := B^{t-1}B^{\alpha} = B^{t-1+\alpha}$
+					\item größte Zahl: $ \lambda := (B^{t} - 1)B^{\beta} $\Biglb
+				\end{itemize} 
+			
+			
+			\subsubsection{Runden, Nachbarn}
+				Da mit den Gleitpunktzahlen nur eine Teilmenge der reellen Zahlen abgebildet werden kann, wird es vorkommen, dass das Ergebnis einer Operation nicht genau eine Gleitpunktzahl ist, sondern zwischen zweien liegt. Dann	muss das Ergebnis gerundet werden. Zur einfacheren Notation seien nun $ f_l(x) $ die nächstkleinere und $ f_r(x) $ die nächstgrößere Gleitpunktzahl (linker/rechter Nachbar).
+				
+				\paragraph{Wichtigste Rundungsverfahren}
+					\begin{itemize}
+						\item Abrunden: $ rd_{-}(x) := f_l(x) $
+						\item Aufrunden: $ rd_{+}(x) := f_r(x) $
+						\item Abschneiden $ rd_0(x) := \begin{cases}
+						rd_-(x), & x\geq 0\\
+						rd_+(x), & x < 0
+						\end{cases} $
+						\item korrektes Runden: $ rd_*(x) := \begin{cases}
+						f_l(x), & x < \frac{f_l(x) + f_r(x)}{2}\\
+						\text{Nachbar mit gerader Mantisse,} & x = \frac{f_l(x) + f_r(x)}{2}\\
+						f_r(x), & x > \frac{f_l(x) + f_r(x)}{2}
+						\end{cases} $\\ (Sehr häufig in der Praxis)
+					\end{itemize}
+				
+				\paragraph{Rundungsfehler}
+					\begin{itemize}
+						\item absoluter Rundungsfehler: $ rd(x) - x $
+						\item relativer Rundungsfehler: $ \varepsilon = \dfrac{rd(x)-x}{x} , x \neq 0$
+					\end{itemize}
+					Wichtig für später ist die Umformung $ rd(x) = x \cdot (1+\varepsilon) $ \Biglb
+					
+					
+			\subsubsection{Fehler beim Rechnen mit Maschinenzahlen}
+				\paragraph{Notation}Für eine Operation $ \ast  \in \{+,-,\cdot,\div\}$ wird die approximative Operation mit einem Punkt darüber dargestellt, also $ \dotast $
+				
+				\paragraph{Relativer Fehler}Der relative Fehler einer Operation $ \ast $ ist
+				$$ \varepsilon_\ast(a,b) := \frac{(a \dotast b) - (a \ast b)}{a \ast b}, a \ast b \neq 0 $$ \pagebreak
+				
+		
+			\subsubsection{A-priori-Fehleranalyse}
+				\paragraph{Vorwärtsfehleranalyse} Hier wird ein Faktor gesucht, um den das Ergebnis vom exakten Ergebnis abweicht:
+				$$ a \dotast b \dotdelta c = (a \ast b \Delta c) \cdot (1+\varepsilon), |\varepsilon| \leq ?$$
+				
+				\paragraph{Rückwärtsfehleranalyse} Hier ist die Frage: Wie stark sind die Eingabedaten maximal verändert, damit mit veränderten Daten und exakter Rechnung das gleiche rauskommt wie mit den 'korrekten' Daten und approximativer Operation?
+				$$ a \dotast b \dotdelta c = (a(1+\varepsilon_a)) \ast (b(1+\varepsilon_b)) \ast (c(1+\varepsilon_c)), |\varepsilon_a|,|\varepsilon_b|, |\varepsilon_c| \leq ? $$\Biglb
+				
+				
+		\subsection{Kondition und Stabilität}
+			Die zukünftige Auffassung eines 'Problems' wird es sein, eine Funktion
+				$$ f: X \longrightarrow Y $$
+			an einer Stelle $ x \in X $ auswerten zu müssen. Dabei ist z.B. $ X = \realnumbers^n $, $ Y = \realnumbers^m $.
+			
+			\subsubsection{Kondition}
+				Die Kondition ist eine Eigenschaft des Problems und beschreibt wie sich Störungen in den Eingabedaten auf das Ergebnis auswirken, wenn man sonst alles 'richtig' macht. Wenn das Problem schlecht konditioniert ist, dann kann man unabhängig vom Lösungsverfahren nie eine hohe Genauigkeit erzielen.\\\\
+				Für ein Problem $ f: X \longrightarrow Y $, gestörte Eingabedaten $ \tilde{x} = x + \Delta x $
+				mit gestörtem Ergebnis \\$ \tilde{y} = f(\tilde{x}) = y + \Delta y$ ist
+				
+				\paragraph{die absolute Kondition}
+					$$ \kappa_{abs}(x) = \frac{\Norm{\Delta y}_Y}{\Norm{\Delta x}_X} $$
+					
+				\paragraph{die relative Kondition}
+					$$ \kappa_{rel}(x) = \frac{\delta_y}{\delta_x} = \frac{\Norm{\Delta y}_Y}{\Norm{\Delta x}_X} \cdot \frac{\Norm{x}_X}{\Norm{y}_Y} = \kappa_{abs} \cdot \frac{\Norm{x}_X}{\Norm{y}_Y}$$\pagebreak
+			
+			\subsubsection{Stabilität}
+				Die Stabilität ist eine Eigenschaft des Lösungsverfahrens. Sie beschreibt, wie sich Fehler im Verfahren (Diskretisierung, Rundung,\ldots) auf das Ergebnis auswirken (exakte Eingabedaten).\\
+				Ein numerischer Algorithmus heißt stabil, wenn für alle Eingabedaten $ x $ unter dem Einfluss von Rundungs- und Approximationsfehlern das Ergebnis $ \tilde{y} $ das exakte Ergebnis zu leicht modifizierten Eingabedaten ist,
+					$$ \tilde{y} = f(\tilde{x}) \hspace*{3mm} mit \hspace*{3mm} \tilde{x} \in U_\varepsilon(x)$$
+
+				
+				
+				
+				
+				
+				
+				
+					
+				
+				
+				
+				
+				
+					
+				
+		
+		
+		
+		
+		
+		
+		
+		
