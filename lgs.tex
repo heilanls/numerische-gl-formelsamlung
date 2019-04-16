@@ -1,1 +1,39 @@
 \section{Lineare Gleichungssysteme}
+	\subsection{Algorithmen}
+		\subsubsection{Gauß-Elimination}
+			Verfahren zur Lösung des LGS $ Ax = b, \hspace*{7mm} det(A) \neq 0 $. Dabei eliminiert man zuerst, um dann die Rücksubstitution anzuwenden.
+			
+			\paragraph{Elimination} Hier versucht man, in jeder Zeile eine Null mehr zu erzeugen. In Zeile 1 bleiben alle $ a_{1,j} $ stehen, in Zeile $ j $ sollen dann vor Eintrag $ a_{j,j} $ nur Nullen stehen. Vor dem $j$-ten Durchlauf der Elimination sieht das LGS so aus:	
+			%%%%% Hier kommen leider ein paar hässliche Zeilen, habe keine Mögl. gefunden, große Matrizen schöer darzustellen... %%%%%
+			$$ \begin{pmatrix}[cccccc|c]
+			a_{1,1} & a_{1,2} & \dots & a_{1,j} & \dots & a_{1,n} & b_1^{(j-1)}\\
+			0 & a_{2,2} & \dots & a_{2,j} & \dots & a_{2,n} & b_2^{(j-1)} \\
+			\vdots & \ddots & \ddots & \vdots & \vdots & \vdots & \vdots \\
+			0 & \dots & 0 & a_{j,j} & \dots & a_{j,n} & b_j^{(j-1)} \\
+			0 & \dots & 0 & a_{j+1,j} & \dots & a_{j+1,n} & b_{j+1}^{(j-1)}\\
+			\vdots &   & \vdots & \vdots &  & \vdots & \vdots\\
+			0 & \dots & 0 & a_{n,j} & \dots & a_{n,n} & b_{n}^{(j-1)}
+			\end{pmatrix} $$
+			Danach dann so (alles unter $ a_{j,j} $ wurde eliminiert):
+			$$ \begin{pmatrix}[cccccc|c]
+			a_{1,1} & a_{1,2} & \dots & a_{1,j} & \dots & a_{1,n} & b_1^{(j)}\\
+			0 & a_{2,2} & \dots & a_{2,j} & \dots & a_{2,n} & b_2^{(j)} \\
+			\vdots & \ddots & \ddots & \vdots & \vdots & \vdots & \vdots \\
+			0 & \dots & 0 & a_{j,j} & \dots & a_{j,n} & b_j^{(j)} \\
+			0 & \dots & 0 & \textbf{0} & \dots & a_{j+1,n} & b_{j+1}^{(j)}\\
+			\vdots &   & \vdots & \vdots &  & \vdots & \vdots\\
+			0 & \dots & 0 & \textbf{0} & \dots & a_{n,n} & b_{n}^{(j)}
+			\end{pmatrix} $$
+			%%%%% Ende hässliche Zeilen %%%%%
+			Am Ende erhält man dann eine obere Dreiecksmatrix, wobei ganz unten nur noch $ a_{n,n} = b_n^{(n)} $ steht, wobei $ b_n^{(n)} $ der Wert nach n Durchläufen der Elimination ist (der verändert sich ja, wenn man Zeilenumformungen macht).\\
+			\textbf{Merken:} Das Eliminieren der Einträge in jeder Spalte impliziert, dass für alle i,j ein Koeffizient $ \ell_{i,j} $ existiert mit $ \ell_{i,j} = \dfrac{a_{i,j}^{(j)}}{a_{j,j}^{(j)}}  $
+			
+			\paragraph{Rücksubstitution} Hier muss man nur noch von unten nach oben die Lösungen einsetzen: 
+			In Zeile $ n-1 $ steht ja im Prinzip
+			$$ a_{n-1,n-1}x_{n-1} + a_{n-1,n}x_n = b_{n-1}^{(n)} $$
+			Wir haben die Lösung für $ x_n $ aber schon aus der letzten Zeile gegeben, denn da steht
+			$$ a_{n,n}x_n = b_n^{(n)} \text{, also }  x_n = \frac{b_n^{(n)}}{a_{n,n}} $$
+			Das kann man dann in die vorletzte Zeile einsetzen und erhält dann die Lösung für $ x_{n-1} $ usw.
+			
+			
+			

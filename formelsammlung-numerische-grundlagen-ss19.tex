@@ -2,6 +2,15 @@
 
 \input{../../../latex/usepackage.tex}
 \input{../../../latex/commands.tex}
+
+%%%%% um LGS mit Strich darstellen zu können:
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
 \begin{document}
 	\input{header.tex}
 	
