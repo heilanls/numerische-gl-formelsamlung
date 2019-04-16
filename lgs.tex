@@ -15,18 +15,18 @@
 			0 & \dots & 0 & a_{n,j} & \dots & a_{n,n} & b_{n}^{(j-1)}
 			\end{pmatrix} $$
 			Danach dann so (alles unter $ a_{j,j} $ wurde eliminiert):
-			$$ \begin{pmatrix}[cccccc|c]
-			a_{1,1} & a_{1,2} & \dots & a_{1,j} & \dots & a_{1,n} & b_1^{(j)}\\
-			0 & a_{2,2} & \dots & a_{2,j} & \dots & a_{2,n} & b_2^{(j)} \\
-			\vdots & \ddots & \ddots & \vdots & \vdots & \vdots & \vdots \\
-			0 & \dots & 0 & a_{j,j} & \dots & a_{j,n} & b_j^{(j)} \\
-			0 & \dots & 0 & \textbf{0} & \dots & a_{j+1,n} & b_{j+1}^{(j)}\\
-			\vdots &   & \vdots & \vdots &  & \vdots & \vdots\\
-			0 & \dots & 0 & \textbf{0} & \dots & a_{n,n} & b_{n}^{(j)}
+			$$ \begin{pmatrix}[ccccccc|c]
+			a_{1,1} & a_{1,2} & \dots & a_{1,j} & \dots & & a_{1,n} & b_1^{(j)}\\
+			0 & a_{2,2} & \dots & a_{2,j} & \dots & & a_{2,n} & b_2^{(j)} \\
+			\vdots & \ddots & \ddots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+			0 & \dots & 0 & a_{j,j} & \dots & & a_{j,n} & b_j^{(j)} \\
+			0 & \dots & 0 & \textbf{0} & a_{j+1,j+1} & \dots & a_{j+1,n} & b_{j+1}^{(j)}\\
+			\vdots &   & \vdots & \vdots & \vdots  & \ddots & \vdots & \vdots\\
+			0 & \dots & 0 & \textbf{0} & a_{n,j+1} & \dots & a_{n,n} & b_{n}^{(j)}
 			\end{pmatrix} $$
 			%%%%% Ende hässliche Zeilen %%%%%
 			Am Ende erhält man dann eine obere Dreiecksmatrix, wobei ganz unten nur noch $ a_{n,n} = b_n^{(n)} $ steht, wobei $ b_n^{(n)} $ der Wert nach n Durchläufen der Elimination ist (der verändert sich ja, wenn man Zeilenumformungen macht).\\
-			\textbf{Merken:} Das Eliminieren der Einträge in jeder Spalte impliziert, dass für alle i,j ein Koeffizient $ \ell_{i,j} $ existiert mit $ \ell_{i,j} = \dfrac{a_{i,j}^{(j)}}{a_{j,j}^{(j)}}  $
+			\textbf{Merken:} Das Eliminieren der Einträge in jeder Spalte impliziert, dass für alle i,j ein Koeffizient $ \ell_{i,j} $ existiert mit $ \ell_{i,j} = \dfrac{a_{i,j}^{(j)}}{a_{j,j}^{(j)}}  $. Dann ist $  $
 			
 			\paragraph{Rücksubstitution} Hier muss man nur noch von unten nach oben die Lösungen einsetzen: 
 			In Zeile $ n-1 $ steht ja im Prinzip
